@@ -9,6 +9,7 @@ export interface Doctor {
   experience: LocalizedText;
   highlights: { en: [string, string]; ar: [string, string] };
   order: number;
+  imageUrl?: string;
 }
 
 export interface LeadInput {

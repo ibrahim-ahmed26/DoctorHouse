@@ -3,9 +3,6 @@ import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { onAuthStateChanged, signOut, type User } from "firebase/auth";
 import { auth } from "@/lib/firebase/authClient";
-// The stylesheet is loaded by the admin route; suppress TypeScript's
-// side-effect import check when CSS type declarations are unavailable.
-// @ts-expect-error CSS files do not have TypeScript declarations.
 import "./admin.css";
 
 export default function AdminLayout({
