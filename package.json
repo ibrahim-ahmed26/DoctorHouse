@@ -1,0 +1,31 @@
+{
+  "name": "doctor-house-care",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "seed:doctors": "tsx src/scripts/seed-doctors.ts",
+    "make:super-admin": "tsx src/scripts/set-super-admin.ts",
+    "wipe:doctors": "tsx src/scripts/wipe-doctors.ts",
+    "seed:doctors-with-images": "tsx src/scripts/seed-doctors-with-images.ts"
+  },
+  "dependencies": {
+    "@opentelemetry/api": "^1.9.1",
+    "dotenv": "^18.0.4",
+    "firebase": "^10.13.2",
+    "firebase-admin": "^12.4.0",
+    "next": "14.2.15",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.15",
+    "@types/react": "^18.3.4",
+    "@types/react-dom": "^18.3.0",
+    "tsx": "^4.19.1",
+    "typescript": "^5.5.4"
+  }
+}
