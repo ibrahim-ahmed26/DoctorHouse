@@ -26,3 +26,9 @@ export interface Lead extends LeadInput {
   status: LeadStatus;
   createdAt: string; // ISO string once serialized for the client
 }
+export interface PdfDoc {
+  id: string;
+  title: { en: string; ar: string };
+  publicId: string;
+  order: number;
+}

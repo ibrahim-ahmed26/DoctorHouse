@@ -25,7 +25,6 @@ export default function AdminLayout({
       }
       const result = await u.getIdTokenResult();
       setRole((result.claims.role as "super_admin" | "admin") ?? "admin");
-      // Non-super-admins can't be on /admin/users — bounce them.
       if (
         (result.claims.role ?? "admin") !== "super_admin" &&
         pathname?.startsWith("/admin/users")
@@ -64,6 +63,16 @@ export default function AdminLayout({
               className={pathname?.startsWith("/admin/users") ? "active" : ""}
             >
               Users
+            </a>
+          )}
+          {role === "super_admin" && (
+            <a
+              href="/admin/documents"
+              className={
+                pathname?.startsWith("/admin/documents") ? "active" : ""
+              }
+            >
+              Documents
             </a>
           )}
         </nav>

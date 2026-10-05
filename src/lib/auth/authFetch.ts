@@ -8,12 +8,18 @@ export async function authFetch(input: string, init: RequestInit = {}) {
   if (!user) throw new Error("Not signed in");
   const token = await user.getIdToken();
 
+  // Only force JSON content-type for plain string bodies (our usual
+  // JSON.stringify(...) calls). FormData bodies (file uploads) must set
+  // their own multipart boundary automatically — overriding it breaks
+  // the upload, which is what was happening here.
+  const isJsonBody = typeof init.body === "string";
+
   return fetch(input, {
     ...init,
     headers: {
       ...(init.headers ?? {}),
       Authorization: `Bearer ${token}`,
-      ...(init.body ? { "Content-Type": "application/json" } : {}),
+      ...(isJsonBody ? { "Content-Type": "application/json" } : {}),
     },
   });
 }
