@@ -120,6 +120,11 @@ header {
   color: var(--ink);
   flex-shrink: 0;
 }
+.logo img {
+  height: 36px;
+  width: auto;
+  display: block;
+}
 .logo i {
   width: 26px;
   height: 24px;
