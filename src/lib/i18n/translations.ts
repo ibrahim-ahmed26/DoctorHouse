@@ -16,24 +16,44 @@ export const translations = {
     follow: "Follow us",
     faq: [
       [
-        "How quickly can a doctor visit?",
-        "In most cases, a doctor can reach you within hours of your request, depending on your area and the time of day.",
+        "What is Doctor House Care?",
+        "Doctor House Care brings professional medical care into your home. We coordinate healthcare around the patient's needs, combining medical expertise, comfort and an organized care experience to support both patients and their families.",
       ],
       [
-        "Do you cover all of Cairo?",
-        "We cover Cairo and Giza, including 6th of October City. Tell us your area when you book and we'll confirm.",
+        "What healthcare services do you offer at home?",
+        "Our services include doctor visits, nursing care, physiotherapy and rehabilitation, lab tests and sample collection, and home diagnostics. We also provide elderly and chronic care, wound and post-discharge care, and healthcare support for mothers, newborns and children.",
       ],
       [
-        "Can I request a specific doctor?",
-        "Yes — browse our doctors above and mention their name in the booking form or when we call you.",
+        "Can I arrange care for my parents or another family member?",
+        "Yes. We support family members who are arranging healthcare for parents or loved ones. Our approach brings different care needs together, helping reduce the pressure of coordinating multiple services so you do not have to manage the experience alone.",
       ],
       [
-        "Is this covered by insurance?",
-        "Some insurance and corporate partnerships are supported. Ask our care coordinator when you book.",
+        "Who provides the care at home?",
+        "Care is provided by qualified healthcare professionals according to the service required. Our approach combines professional expertise, clear clinical standards, organized processes and appropriate follow-up, keeping the patient's needs at the center of the experience.",
       ],
       [
-        "What languages do your doctors speak?",
-        "Our team is fluent in both Arabic and English.",
+        "What happens after I request a service?",
+        "The process begins with an assessment to understand the patient's needs. We then coordinate the appropriate care and deliver it at home, with follow-up forming part of the care journey. Each stage is connected to make the experience easier for patients and families to navigate.",
+      ],
+      [
+        "Can different services be coordinated as part of my care?",
+        "Yes. When a patient needs more than one service, we can coordinate those services around their needs rather than treating them as disconnected appointments. This can bring doctor visits, nursing, diagnostics and follow-up into one more organized care experience.",
+      ],
+      [
+        "Do you provide care after a patient leaves the hospital?",
+        "Yes. Our services include wound and post-discharge care, providing professional support and follow-up at home after a hospital stay. Physiotherapy and rehabilitation are also part of our service range, with care organized around the patient's individual needs.",
+      ],
+      [
+        "Do you offer ongoing care for elderly patients or people with chronic conditions?",
+        "Yes. We provide elderly and chronic care for patients who need ongoing support. Care plans can be structured around different needs and adapted over time, helping patients and their families manage care beyond a single visit.",
+      ],
+      [
+        "Does home healthcare replace hospital care?",
+        "No. Some situations require a hospital environment, while others can be supported through professional healthcare at home. The appropriate setting depends on the patient's condition and care requirements. Home healthcare is not a replacement for every hospital visit.",
+      ],
+      [
+        "How can I request a home healthcare service?",
+        "You can contact our team by phone or WhatsApp to discuss the care you or your loved one needs and begin your request.",
       ],
     ] as [string, string][],
     book: "Book a home visit",
@@ -182,24 +202,44 @@ export const translations = {
     docsNote: "للعرض فقط. يُرجى عدم مشاركة كلمة المرور.",
     faq: [
       [
-        "ما مدى سرعة وصول الطبيب؟",
-        "في معظم الحالات، يصل الطبيب خلال ساعات من طلبك، حسب منطقتك ووقت اليوم.",
+        "١. ما هو دكتور هاوس كير؟",
+        "نقدم في دكتور هاوس كير رعاية طبية احترافية داخل منزلك، تجمع بين الخبرة الطبية وراحة المنزل. وننسّق الخدمات وفقًا لاحتياجات المريض، لنوفّر تجربة رعاية منظمة تدعم المريض وأسرته وتمنحهم مزيدًا من الاطمئنان.",
       ],
       [
-        "هل تغطون كل القاهرة؟",
-        "نغطي القاهرة والجيزة، بما فيها ٦ أكتوبر. أخبرنا بمنطقتك عند الحجز وسنؤكد لك.",
+        "٢. ما خدمات الرعاية الصحية التي تقدمونها في المنزل؟",
+        "تشمل خدماتنا زيارات الأطباء المنزلية، والتمريض، والعلاج الطبيعي وإعادة التأهيل، والتحاليل الطبية وسحب العينات، وخدمات التشخيص المنزلي. كما نقدم رعاية كبار السن وأصحاب الأمراض المزمنة، والعناية بالجروح والرعاية بعد الخروج من المستشفى، ورعاية الأمهات وحديثي الولادة والأطفال.",
       ],
       [
-        "هل يمكنني طلب طبيب معين؟",
-        "نعم، تصفح أطباءنا أعلاه واذكر اسمه في نموذج الحجز أو عند اتصالنا بك.",
+        "٣. هل يمكنني طلب الرعاية لوالديّ أو لأحد أفراد أسرتي؟",
+        "نعم، يمكنك ترتيب الرعاية لوالديك أو لأحد أفراد أسرتك. نساعدك على تنسيق الخدمات التي يحتاجها المريض ضمن تجربة منظمة ومترابطة، لتخفيف عبء التعامل مع عدة مقدمي خدمات، حتى لا تتحمل مسؤولية تنظيم الرعاية بمفردك.",
       ],
       [
-        "هل هذا مغطى بالتأمين؟",
-        "نوفر بعض شراكات التأمين والشركات. اسأل منسق الرعاية عند الحجز.",
+        "٤. من يقدم الرعاية الصحية في المنزل؟",
+        "يقدم الرعاية متخصصون مؤهلون في الرعاية الصحية، بحسب نوع الخدمة المطلوبة. ويعتمد نهجنا على الخبرة المهنية، والمعايير الطبية الواضحة، والإجراءات المنظمة، والمتابعة المناسبة، مع وضع احتياجات المريض في مقدمة أولوياتنا.",
       ],
       [
-        "ما اللغات التي يتحدثها الأطباء؟",
-        "فريقنا يتحدث العربية والإنجليزية بطلاقة.",
+        "٥. ماذا يحدث بعد طلب الخدمة؟",
+        "تبدأ الرحلة بتقييم احتياجات المريض، ثم تنسيق الرعاية المناسبة وتقديمها في المنزل، مع المتابعة كجزء من رحلة الرعاية. نربط هذه المراحل في تجربة واضحة ومنظمة، لتسهيل الأمر على المريض وأسرته.",
+      ],
+      [
+        "٦. هل يمكن تنسيق أكثر من خدمة ضمن الرعاية المقدمة لي؟",
+        "نعم، عندما يحتاج المريض إلى أكثر من خدمة، ننسّق هذه الخدمات وفقًا لاحتياجاته بدلًا من التعامل معها كمواعيد منفصلة. وقد يشمل ذلك زيارات الأطباء، والتمريض، وخدمات التشخيص والمتابعة، ضمن تجربة رعاية متكاملة في المنزل.",
+      ],
+      [
+        "٧. هل تقدمون رعاية للمرضى بعد الخروج من المستشفى؟",
+        "نعم، تشمل خدماتنا العناية بالجروح والرعاية بعد الخروج من المستشفى، مع الدعم المهني والمتابعة في المنزل. كما نقدم العلاج الطبيعي وإعادة التأهيل، وتُنظَّم الرعاية وفقًا لاحتياجات كل مريض.",
+      ],
+      [
+        "٨. هل توفرون رعاية مستمرة لكبار السن وأصحاب الأمراض المزمنة؟",
+        "نعم، نقدم رعاية لكبار السن وأصحاب الأمراض المزمنة الذين يحتاجون إلى دعم مستمر. ويمكن تنظيم خطط الرعاية وتعديلها مع تغيّر احتياجات المريض بمرور الوقت، لمساعدته وأسرته على إدارة الرعاية بما يتجاوز الزيارة الواحدة.",
+      ],
+      [
+        "٩. هل تُغني الرعاية الصحية المنزلية عن المستشفى؟",
+        "لا، فبعض الحالات تحتاج إلى رعاية داخل المستشفى، بينما يمكن تقديم الرعاية المناسبة لحالات أخرى في المنزل. ويعتمد اختيار مكان الرعاية على حالة المريض واحتياجاته، لذلك لا تُعد الرعاية المنزلية بديلًا عن جميع زيارات المستشفى.",
+      ],
+      [
+        "١٠. كيف يمكنني طلب خدمة رعاية صحية منزلية؟",
+        "يمكنك التواصل مع فريقنا عبر الهاتف أو واتساب لمناقشة احتياجاتك أو احتياجات أحد أفراد أسرتك، وبدء طلب الخدمة.",
       ],
     ] as [string, string][],
     book: "\u0627\u062D\u062C\u0632 \u0632\u064A\u0627\u0631\u0629 \u0645\u0646\u0632\u0644\u064A\u0629",
