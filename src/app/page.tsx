@@ -12,6 +12,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import Preloader from "@/components/preloader";
 import FAQSection from "@/components/FAQSection";
 import DocumentsSection from "@/components/DocumentsSection";
+import VideoBanner from "@/components/VideoBanner";
 
 export default async function Home() {
   return (
@@ -19,6 +20,7 @@ export default async function Home() {
       <Preloader />
       <Header />
       <Hero />
+      <VideoBanner src="/header-video.mp4" overlay={0.6} />
       <ShiftSection />
       <CrewTeaser />
       <HowItWorks />
