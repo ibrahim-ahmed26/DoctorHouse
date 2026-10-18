@@ -420,7 +420,6 @@ header {
 }
 .room:hover {
   background: #eef4f0;
-  transform: translateY(-4px);
   box-shadow: var(--shadow);
 }
 .room:focus-visible {
