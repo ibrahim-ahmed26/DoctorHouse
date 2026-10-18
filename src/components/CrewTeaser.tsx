@@ -6,7 +6,10 @@ import Reveal from "@/components/Reveal";
 export default function CrewTeaser() {
   const { t } = useLanguage();
   return (
-    <section style={{ background: "var(--sage)" }}>
+    <section
+      className="cover-section"
+      style={{ backgroundImage: "url(/meet-doctors.jpeg)" }}
+    >
       <div className="wrap">
         <Reveal
           stagger={0.1}
@@ -14,9 +17,7 @@ export default function CrewTeaser() {
           style={{ textAlign: "center", maxWidth: 560, margin: "0 auto" }}
         >
           <h2>{t.dh}</h2>
-          <p style={{ color: "var(--mute)", marginTop: 14, fontSize: 16 }}>
-            {t.dp}
-          </p>
+          <p style={{ marginTop: 14, fontSize: 16 }}>{t.dp}</p>
           <Link
             href="/our-crew"
             className="btn"

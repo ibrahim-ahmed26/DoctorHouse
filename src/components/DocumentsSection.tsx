@@ -81,7 +81,7 @@ export default function DocumentsSection() {
     <section
       id="documents"
       className="cover-head"
-      style={{ backgroundImage: "url(/documents-cover.jpg)" }}
+      style={{ backgroundImage: "url(/Book.jpg.jpeg)" }}
     >
       <div className="wrap">
         <div className="head">

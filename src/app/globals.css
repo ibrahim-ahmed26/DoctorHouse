@@ -331,6 +331,7 @@ header {
 .hero {
   padding: 60px 0 100px;
 }
+
 .hero .wrap {
   display: grid;
   grid-template-columns: 1.05fr 1fr;
@@ -384,17 +385,17 @@ header {
 .rooms {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 1fr;
   gap: 16px;
   background: transparent;
   padding: 0;
-  border-radius: 0;
 }
 .room {
   border: 1px solid var(--line);
   border-radius: 16px;
   background: var(--sage);
   color: var(--ink);
-  aspect-ratio: 1/1.05;
+  aspect-ratio: 1 / 1.05;
   padding: 10px 6px;
   cursor: pointer;
   font: 600 12.5px/1.3 var(--sans);
@@ -406,8 +407,10 @@ header {
   text-align: center;
   transition:
     background 0.2s,
-    transform 0.22s,
-    box-shadow 0.22s;
+    box-shadow 0.2s;
+  /* lock every tile to its grid cell, whatever the animation script does */
+  transform: none !important;
+  opacity: 1 !important;
 }
 .room svg {
   width: 30px;
@@ -422,14 +425,23 @@ header {
   background: #eef4f0;
   box-shadow: var(--shadow);
 }
-.room:focus-visible {
-  outline: 2px solid var(--brass);
-  outline-offset: 2px;
-}
 .room[aria-pressed="true"] {
   background: var(--brass);
   color: var(--pine);
   box-shadow: var(--shadow);
+}
+.room:focus {
+  outline: none;
+}
+.room:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: -4px;
+}
+@media (max-width: 560px) {
+  .rooms {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
 }
 .door {
   background: var(--pine-2);
@@ -1257,6 +1269,41 @@ footer {
 }
 .cover-head p {
   color: rgba(255, 255, 255, 0.85) !important;
+}
+.cover-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: var(--pine);
+  color: #fff;
+}
+.cover-section > .wrap {
+  width: 100%;
+}
+.cover-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(27, 38, 58, 0.6) 0%,
+    rgba(27, 38, 58, 0.85) 100%
+  );
+  z-index: 0;
+}
+.cover-section > * {
+  position: relative;
+  z-index: 1;
+}
+.cover-section h2 {
+  color: #fff;
+}
+.cover-section p {
+  color: rgba(255, 255, 255, 0.88);
 }
 .footer-links {
   display: flex;

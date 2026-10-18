@@ -6,7 +6,7 @@ import Reveal from "@/components/Reveal";
 export default function Hero() {
   const { t } = useLanguage();
   return (
-    <section className="hero">
+    <section className="hero"  >
       <div className="wrap">
         <Reveal stagger={0.15} y={24}>
           <h1>{t.h1}</h1>
