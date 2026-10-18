@@ -387,8 +387,13 @@ header {
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: 1fr;
   gap: 16px;
-  background: transparent;
-  padding: 0;
+  padding: 16px; /* same as the gap: equal space top, left and right */
+  background: var(--pine);
+  border-radius: 0 0 20px 20px;
+}
+/* the detail panel under the grid: same 16px */
+.rooms + * {
+  margin-top: 16px !important;
 }
 .room {
   border: 1px solid var(--line);
@@ -441,6 +446,10 @@ header {
   .rooms {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
+    padding: 12px;
+  }
+  .rooms + * {
+    margin-top: 12px !important;
   }
 }
 .door {
@@ -1071,62 +1080,66 @@ footer {
     font-size: 28px;
   }
 }
+/* ===== Documents section: bare icons ===== */
 .docs-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 200px));
+  gap: 32px 28px;
+  justify-content: start;
   margin-bottom: 24px;
 }
 .doc-card {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 28px 24px;
-  text-align: center;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
+  text-align: center;
+  color: #fff;
+  font: inherit;
 }
 .doc-card-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
-  background: var(--sage);
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 84px;
+  height: 84px;
+  background: none;
+  color: var(--brass);
+  transition: transform 0.22s;
+}
+.doc-card:hover .doc-card-icon {
+  transform: translateY(-4px) scale(1.06);
+}
+.doc-card-eye {
+  position: absolute;
+  right: -2px;
+  bottom: 4px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--brass);
   color: var(--pine);
   display: grid;
   place-items: center;
 }
-.doc-card-locked {
-  color: var(--mute);
-  font-size: 14px;
-  font-weight: 600;
+.doc-card-title {
+  font: 600 17px/1.3 var(--serif);
+  color: #fff;
+  max-width: 200px;
 }
-.docs-unlock-form {
-  display: flex;
-  gap: 10px;
-  max-width: 360px;
-  flex-wrap: wrap;
-}
-.docs-unlock-form input {
-  flex: 1;
-  padding: 12px 14px;
-  border-radius: 10px;
-  border: 1.5px solid var(--line);
-  font-size: 15px;
-  min-width: 180px;
-}
-.docs-error {
-  width: 100%;
-  color: #d33;
-  font-size: 13px;
-}
-.docs-note {
-  color: var(--mute);
-  font-size: 13px;
-  margin-top: 4px;
+.doc-card:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 6px;
+  border-radius: 12px;
 }
 
+/* ===== PDF viewer popup ===== */
 .doc-viewer-overlay {
   position: fixed;
   inset: 0;
@@ -1138,12 +1151,8 @@ footer {
 }
 .doc-viewer {
   position: relative;
-}
-.doc-viewer iframe {
-  pointer-events: auto;
-}
-.doc-viewer {
   background: var(--card);
+  color: var(--ink);
   border-radius: 14px;
   overflow: hidden;
   width: 100%;
@@ -1153,12 +1162,19 @@ footer {
   flex-direction: column;
 }
 .doc-viewer-bar {
+  flex-shrink: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 14px 18px;
   border-bottom: 1px solid var(--line);
   font-weight: 700;
+}
+.doc-viewer-bar span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-inline-end: 12px;
 }
 .doc-viewer-bar button {
   background: none;
@@ -1167,14 +1183,82 @@ footer {
   cursor: pointer;
   color: var(--mute);
 }
-.doc-viewer iframe {
-  flex: 1;
-  border: 0;
-  width: 100%;
+.doc-viewer-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
 }
+.doc-viewer-bar .doc-viewer-download {
+  background: var(--brass);
+  color: var(--pine);
+  font: 700 13px var(--sans);
+  padding: 8px 16px;
+  border-radius: 999px;
+}
+/* the PDF area fills what's left under the bar and scrolls on its own */
+.doc-viewer > :not(.doc-viewer-bar):not(.download-gate-overlay) {
+  flex: 1;
+  min-height: 0;
+}
+
+/* ===== Download password prompt (inside the popup) ===== */
+.download-gate-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.6);
+}
+.download-gate {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px;
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: var(--shadow);
+}
+.download-gate p {
+  margin: 0;
+  font-weight: 700;
+}
+.download-gate input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 15px;
+}
+.download-gate .docs-error {
+  color: #ff6b6b;
+  font-size: 13px;
+  font-weight: 500;
+}
+.download-gate-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
 @media (max-width: 860px) {
   .docs-grid {
-    grid-template-columns: 1fr;
+    justify-content: center;
+  }
+}
+@media (max-width: 560px) {
+  .doc-viewer-overlay {
+    padding: 10px;
+  }
+  .doc-viewer {
+    height: 90vh;
   }
 }
 @media print {

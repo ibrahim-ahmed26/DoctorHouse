@@ -91,25 +91,45 @@ export default function DocumentsSection() {
 
         <Reveal className="docs-grid" stagger={0.1} y={18}>
           {docs.map((d) => (
-            <div key={d.id} className="doc-card">
-              <div className="doc-card-icon">
+            <button
+              key={d.id}
+              type="button"
+              className="doc-card"
+              onClick={() => setViewing(d)}
+              aria-label={`${t.docsView}: ${d.title[locale]}`}
+            >
+              <span className="doc-card-icon">
                 <svg
                   viewBox="0 0 24 24"
-                  width="28"
-                  height="28"
+                  width="56"
+                  height="56"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth="1.6"
+                  strokeWidth="1.4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
                   <path d="M7 3h7l4 4v14H7z" />
                   <path d="M14 3v4h4" />
                 </svg>
-              </div>
-              <h3>{d.title[locale]}</h3>
-              <button className="btn" onClick={() => setViewing(d)}>
-                {t.docsView}
-              </button>
-            </div>
+                <span className="doc-card-eye">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="16"
+                    height="16"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                </span>
+              </span>
+              <span className="doc-card-title">{d.title[locale]}</span>
+            </button>
           ))}
         </Reveal>
       </div>
