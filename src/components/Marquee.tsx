@@ -22,6 +22,7 @@ export default function Marquee({
         style={{
           animationDuration: `${speed}s`,
           animationDirection: reverse ? "reverse" : "normal",
+          gap,
         }}
       >
         <div className="marquee-group" style={{ gap }}>

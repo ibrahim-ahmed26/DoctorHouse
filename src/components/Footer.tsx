@@ -12,8 +12,19 @@ export default function Footer() {
     <footer>
       <div className="wrap footer-grid">
         <div>
-          <div className="footer-brand">{t.brand}</div>
+          <img src="/logo.png" alt={t.brand} className="footer-logo" />
           <p className="footer-tag">{t.foot}</p>
+        </div>
+
+        <div className="footer-links">
+          <span className="footer-links-head">{t.footExplore}</span>
+          <nav>
+            <a href="/#home">{t.n1}</a>
+            <a href="/our-crew">{t.n2}</a>
+            <a href="/#how">{t.n3}</a>
+            <a href="/#partners">{t.n4}</a>
+            <a href="/#faq">{t.n5}</a>
+          </nav>
         </div>
 
         <div className="footer-address">

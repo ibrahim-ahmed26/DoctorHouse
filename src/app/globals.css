@@ -121,7 +121,7 @@ header {
   flex-shrink: 0;
 }
 .logo img {
-  height: 36px;
+  height: 48px;
   width: auto;
   display: block;
 }
@@ -384,13 +384,14 @@ header {
 .rooms {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 4px;
-  background: var(--pine);
-  padding: 4px;
-  border-radius: 0 0 16px 16px;
+  gap: 16px;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
 }
 .room {
-  border: 0;
+  border: 1px solid var(--line);
+  border-radius: 16px;
   background: var(--sage);
   color: var(--ink);
   aspect-ratio: 1/1.05;
@@ -405,7 +406,8 @@ header {
   text-align: center;
   transition:
     background 0.2s,
-    transform 0.2s;
+    transform 0.22s,
+    box-shadow 0.22s;
 }
 .room svg {
   width: 30px;
@@ -418,11 +420,13 @@ header {
 }
 .room:hover {
   background: #eef4f0;
-  transform: translateY(-2px);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
 }
 .room[aria-pressed="true"] {
   background: var(--brass);
-  color: #1b1608;
+  color: var(--pine);
+  box-shadow: var(--shadow);
 }
 .door {
   background: var(--pine-2);
@@ -540,6 +544,7 @@ header {
   padding: 22px 24px;
   display: flex;
   flex-direction: column;
+  min-height: 230px;
 }
 .doc-body .sp {
   color: var(--brass);
@@ -553,6 +558,7 @@ header {
   list-style: none;
   color: var(--mute);
   font-size: 13.5px;
+  flex: 1;
 }
 .doc-body li {
   padding: 5px 0;
@@ -562,6 +568,7 @@ header {
   font-weight: 700;
   color: var(--ink);
   text-underline-offset: 4px;
+  margin-top: auto;
 }
 
 /* ---------- Marquee (steps) ---------- */
@@ -735,9 +742,15 @@ footer {
   border-top: 1px solid var(--line);
   padding: 40px 0 0;
 }
+.footer-logo {
+  height: 80px;
+  width: auto;
+  display: block;
+  margin-bottom: 10px;
+}
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.2fr 1fr auto;
+  grid-template-columns: 1.1fr 0.9fr 1fr auto;
   gap: 28px;
   align-items: start;
   padding-bottom: 28px;
@@ -1210,4 +1223,63 @@ footer {
   display: flex;
   gap: 8px;
   justify-content: center;
+}
+.cover-head {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  padding: 64px 24px;
+  color: #fff;
+  overflow: hidden;
+}
+.cover-head::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(27, 38, 58, 0.55) 0%,
+    rgba(27, 38, 58, 0.8) 100%
+  );
+  z-index: 0;
+}
+.cover-head > * {
+  position: relative;
+  z-index: 1;
+}
+.cover-head h2 {
+  color: #fff;
+}
+.cover-head p {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer-links-head {
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin-bottom: 4px;
+}
+.footer-links nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.footer-links nav a {
+  color: var(--ink);
+  font-size: 14.5px;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+.footer-links nav a:hover {
+  opacity: 1;
+  text-decoration: underline;
 }

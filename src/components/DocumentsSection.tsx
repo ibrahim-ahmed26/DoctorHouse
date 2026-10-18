@@ -78,7 +78,11 @@ export default function DocumentsSection() {
   }
 
   return (
-    <section id="documents">
+    <section
+      id="documents"
+      className="cover-head"
+      style={{ backgroundImage: "url(/documents-cover.jpg)" }}
+    >
       <div className="wrap">
         <div className="head">
           <h2>{t.docsHead}</h2>

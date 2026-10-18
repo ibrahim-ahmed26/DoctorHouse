@@ -175,6 +175,7 @@ export const translations = {
       "Full home care plan",
       "Partnership inquiry",
     ],
+    footExplore: "Explore",
   },
   ar: {
     brand:
@@ -365,5 +366,6 @@ export const translations = {
       "\u062E\u0637\u0629 \u0631\u0639\u0627\u064A\u0629 \u0645\u0646\u0632\u0644\u064A\u0629 \u0643\u0627\u0645\u0644\u0629",
       "\u0627\u0633\u062A\u0641\u0633\u0627\u0631 \u0634\u0631\u0627\u0643\u0629",
     ],
+    footExplore: "استكشاف",
   },
 } satisfies Record<Locale, any>;

@@ -90,17 +90,6 @@ export default function Preloader() {
             />
           </svg>
         )}
-        <div
-          style={{
-            fontFamily: "var(--serif)",
-            fontSize: 22,
-            color: "var(--on)",
-            fontWeight: 600,
-            letterSpacing: "-.01em",
-          }}
-        >
-          Dr.House Care
-        </div>
         <div className="preloader-bar">
           <div className="preloader-fill" />
         </div>

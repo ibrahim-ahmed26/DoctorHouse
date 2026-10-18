@@ -18,8 +18,7 @@ export default function Header() {
     <header>
       <div className="wrap bar">
         <a className="logo" href="/#top">
-          <img src="/logo.png" alt={t.brand} />
-          <span>{t.brand}</span>
+          <img src="/logoDoctor.png" alt={t.brand} />
         </a>
 
         <nav className="desktop-nav">
