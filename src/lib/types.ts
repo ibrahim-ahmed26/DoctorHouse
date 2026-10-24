@@ -2,6 +2,8 @@ export type Locale = "en" | "ar";
 
 export type LocalizedText = { en: string; ar: string };
 
+export type CrewCategory = "doctor" | "nurse";
+
 export interface Doctor {
   id: string;
   name: LocalizedText;
@@ -10,6 +12,7 @@ export interface Doctor {
   highlights: { en: [string, string]; ar: [string, string] };
   order: number;
   imageUrl?: string;
+  category?: CrewCategory;
 }
 
 export interface LeadInput {

@@ -8,19 +8,27 @@ import type { Doctor } from "@/lib/types";
 // unpublished / freshly-added ones instantly without waiting on public rules).
 export async function GET(req: Request) {
   const check = await requireAdmin(req);
-  if (!check.ok) return NextResponse.json({ error: check.error }, { status: check.status });
+  if (!check.ok)
+    return NextResponse.json({ error: check.error }, { status: check.status });
 
   const snap = await getAdminDb().collection("doctors").orderBy("order").get();
-  const doctors = snap.docs.map((d) => ({ id: d.id, ...(d.data() as Omit<Doctor, "id">) }));
+  const doctors = snap.docs.map((d) => ({
+    id: d.id,
+    ...(d.data() as Omit<Doctor, "id">),
+  }));
   return NextResponse.json({ doctors });
 }
 
-// POST: create a new doctor.
+// POST: create a new person (doctor or nurse).
 export async function POST(req: Request) {
   const check = await requireAdmin(req);
-  if (!check.ok) return NextResponse.json({ error: check.error }, { status: check.status });
+  if (!check.ok)
+    return NextResponse.json({ error: check.error }, { status: check.status });
 
   const body = (await req.json()) as Omit<Doctor, "id">;
-  const ref = await getAdminDb().collection("doctors").add(body);
+  const category = body.category === "nurse" ? "nurse" : "doctor";
+  const ref = await getAdminDb()
+    .collection("doctors")
+    .add({ ...body, category });
   return NextResponse.json({ id: ref.id });
 }

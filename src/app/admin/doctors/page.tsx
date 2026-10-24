@@ -48,7 +48,7 @@ export default function DoctorsAdminPage() {
   }
 
   async function handleDelete(id: string) {
-    if (!confirm("Delete this doctor?")) return;
+    if (!confirm("Delete this person?")) return;
     await authFetch(`/api/admin/doctors/${id}`, { method: "DELETE" });
     await load();
   }
@@ -63,49 +63,74 @@ export default function DoctorsAdminPage() {
     );
   }
 
+  const groups = [
+    { title: "Doctors", list: doctors.filter((d) => d.category !== "nurse") },
+    { title: "Nurses", list: doctors.filter((d) => d.category === "nurse") },
+  ];
+
   return (
     <div>
       <div className="admin-header-row">
-        <h1>Doctors</h1>
+        <h1>Our crew</h1>
         <button className="admin-btn" onClick={() => setEditing("new")}>
-          + Add doctor
+          + Add person
         </button>
       </div>
 
       {loading ? (
         <p className="admin-loading">Loading...</p>
       ) : doctors.length === 0 ? (
-        <p className="admin-empty">No doctors yet.</p>
+        <p className="admin-empty">No one yet.</p>
       ) : (
-        <div className="admin-list">
-          {doctors.map((d) => (
-            <div key={d.id} className="admin-card">
-              <div>
-                <strong>{d.name.en}</strong>{" "}
-                <span style={{ color: "var(--mute)" }}>({d.name.ar})</span>
-                <div
-                  style={{ fontSize: 13, color: "var(--mute)", marginTop: 4 }}
-                >
-                  {d.specialty.en} — order {d.order}
-                </div>
+        groups.map((g) => (
+          <div key={g.title} style={{ marginBottom: 32 }}>
+            <h2 style={{ fontSize: 20, margin: "0 0 12px" }}>
+              {g.title}{" "}
+              <span style={{ color: "var(--mute)", fontSize: 15 }}>
+                ({g.list.length})
+              </span>
+            </h2>
+            {g.list.length === 0 ? (
+              <p className="admin-empty">No {g.title.toLowerCase()} yet.</p>
+            ) : (
+              <div className="admin-list">
+                {g.list.map((d) => (
+                  <div key={d.id} className="admin-card">
+                    <div>
+                      <strong>{d.name.en}</strong>{" "}
+                      <span style={{ color: "var(--mute)" }}>
+                        ({d.name.ar})
+                      </span>
+                      <div
+                        style={{
+                          fontSize: 13,
+                          color: "var(--mute)",
+                          marginTop: 4,
+                        }}
+                      >
+                        {d.specialty.en} — order {d.order}
+                      </div>
+                    </div>
+                    <div style={{ display: "flex", gap: 8 }}>
+                      <button
+                        className="admin-btn outline"
+                        onClick={() => setEditing(d)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="admin-btn danger"
+                        onClick={() => handleDelete(d.id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <div style={{ display: "flex", gap: 8 }}>
-                <button
-                  className="admin-btn outline"
-                  onClick={() => setEditing(d)}
-                >
-                  Edit
-                </button>
-                <button
-                  className="admin-btn danger"
-                  onClick={() => handleDelete(d.id)}
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+            )}
+          </div>
+        ))
       )}
     </div>
   );

@@ -1,13 +1,15 @@
 "use client";
 import { useState } from "react";
-import type { Doctor } from "@/lib/types";
+import type { CrewCategory, Doctor } from "@/lib/types";
 
 type DraftDoctor = Omit<Doctor, "id"> & {
   imageUrl: string;
+  category: CrewCategory;
 };
 
 const empty: DraftDoctor = {
   order: 1,
+  category: "doctor",
   name: { en: "", ar: "" },
   specialty: { en: "", ar: "" },
   experience: { en: "", ar: "" },
@@ -25,7 +27,13 @@ export default function DoctorForm({
   onCancel: () => void;
 }) {
   const [draft, setDraft] = useState<DraftDoctor>(
-    initial ? { ...initial, imageUrl: initial.imageUrl ?? "" } : empty,
+    initial
+      ? {
+          ...initial,
+          imageUrl: initial.imageUrl ?? "",
+          category: initial.category ?? "doctor",
+        }
+      : empty,
   );
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -96,7 +104,7 @@ export default function DoctorForm({
 
   return (
     <form onSubmit={submit} className="admin-form">
-      <h2>{initial ? "Edit doctor" : "Add doctor"}</h2>
+      <h2>{initial ? "Edit person" : "Add person"}</h2>
 
       <div className="admin-field">
         <label>Photo</label>
@@ -146,13 +154,25 @@ export default function DoctorForm({
         </div>
       </div>
 
-      <div className="admin-field">
-        <label>Order</label>
-        <input
-          type="number"
-          value={draft.order}
-          onChange={(e) => field("order", Number(e.target.value))}
-        />
+      <div className="admin-field-row">
+        <div className="admin-field">
+          <label>Type</label>
+          <select
+            value={draft.category}
+            onChange={(e) => field("category", e.target.value)}
+          >
+            <option value="doctor">Doctor</option>
+            <option value="nurse">Nurse</option>
+          </select>
+        </div>
+        <div className="admin-field">
+          <label>Order</label>
+          <input
+            type="number"
+            value={draft.order}
+            onChange={(e) => field("order", Number(e.target.value))}
+          />
+        </div>
       </div>
 
       <div className="admin-field-row">
