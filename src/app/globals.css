@@ -1,6 +1,6 @@
 :root {
-  --bg: #2a3334;
-  --card: #334041;
+  --bg: #f7fffe;
+  --card: #ffffff;
   --ink: #1b263a;
   --mute: #5c6f7e;
   --pine: #1b263a;
@@ -19,11 +19,11 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #1f2121;
-    --card: #262a2a;
+    --bg: #2a3334;
+    --card: #334041;
     --ink: #f2fffd;
-    --mute: #9fb3b0;
-    --pine: #141818;
+    --mute: #a9bdba;
+    --pine: #1f2a2b;
     --pine-2: #0d3a45;
     --sage: #2f4442;
     --line: #475857;
@@ -32,14 +32,14 @@
   }
 }
 :root[data-theme="dark"] {
-  --bg: #1f2121;
-  --card: #262a2a;
+  --bg: #2a3334;
+  --card: #334041;
   --ink: #f2fffd;
-  --mute: #9fb3b0;
-  --pine: #141818;
+  --mute: #a9bdba;
+  --pine: #1f2a2b;
   --pine-2: #0d3a45;
-  --sage: #1e3634;
-  --line: #33403e;
+  --sage: #2f4442;
+  --line: #475857;
   --on: #f2fffd;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
@@ -295,6 +295,22 @@ header {
 .mobile-nav-cta {
   margin-top: 18px;
   text-align: center;
+}
+.mobile-close {
+  position: absolute;
+  top: 20px;
+  inset-inline-end: 20px;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--sage);
+  color: var(--ink);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
 }
 
 @media (min-width: 861px) {
@@ -1512,6 +1528,11 @@ footer {
   display: flex;
   justify-content: flex-end;
   padding: 96px 24px 0;
+}
+.gate-foot {
+  display: flex;
+  justify-content: center;
+  padding: 28px 24px 56px;
 }
 .gate-signout {
   padding: 8px 18px;
