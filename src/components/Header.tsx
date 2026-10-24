@@ -26,6 +26,7 @@ export default function Header() {
           <Link href="/our-crew">{t.n2}</Link>
           <a href="/#how">{t.n3}</a>
           <a href="/#partners">{t.n4}</a>
+          <Link href="/documents">{t.n6}</Link>
           <a href="/#faq">{t.n5}</a>
         </nav>
 
@@ -65,6 +66,9 @@ export default function Header() {
         <a href="/#partners" onClick={() => setOpen(false)}>
           {t.n4}
         </a>
+        <Link href="/documents" onClick={() => setOpen(false)}>
+          {t.n6}
+        </Link>
         <a href="/#faq" onClick={() => setOpen(false)}>
           {t.n5}
         </a>

@@ -1,18 +1,20 @@
 "use client";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export default function BookingForm() {
   const { t, locale } = useLanguage();
-  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">(
-    "idle",
-  );
+  const [sending, setSending] = useState(false);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
-    setStatus("sending");
+    setSending(true);
+    const id = toast.loading(
+      locale === "ar" ? "جارٍ الإرسال..." : "Sending...",
+    );
     try {
       const res = await fetch("/api/leads", {
         method: "POST",
@@ -25,10 +27,17 @@ export default function BookingForm() {
         }),
       });
       if (!res.ok) throw new Error("Request failed");
-      setStatus("ok");
+      toast.success(t.ok, { id, duration: 6000 });
       form.reset();
     } catch {
-      setStatus("error");
+      toast.error(
+        locale === "ar"
+          ? "حدث خطأ ما، حاول مرة أخرى."
+          : "Something went wrong. Please try again.",
+        { id },
+      );
+    } finally {
+      setSending(false);
     }
   }
 
@@ -133,26 +142,9 @@ export default function BookingForm() {
             </select>
           </div>
 
-          <button
-            className="btn book-submit"
-            type="submit"
-            disabled={status === "sending"}
-          >
-            {status === "sending" ? "..." : t.send}
+          <button className="btn book-submit" type="submit" disabled={sending}>
+            {sending ? "..." : t.send}
           </button>
-
-          {status === "ok" && (
-            <div className="book-status ok" role="status">
-              {t.ok}
-            </div>
-          )}
-          {status === "error" && (
-            <div className="book-status error" role="alert">
-              {locale === "ar"
-                ? "حدث خطأ ما، حاول مرة أخرى."
-                : "Something went wrong. Please try again."}
-            </div>
-          )}
         </form>
       </div>
     </section>

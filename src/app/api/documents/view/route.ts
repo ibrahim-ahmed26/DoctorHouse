@@ -1,12 +1,15 @@
 import { NextResponse } from "next/server";
 import { getAdminDb } from "@/lib/firebase/admin";
 import cloudinary from "@/lib/cloudinaryAdmin";
+import { requireRole } from "@/lib/auth/roles";
 import type { PdfDoc } from "@/lib/types";
 
-// Public, no password required — returns short-lived signed URLs for
-// inline viewing only. Downloading still goes through /api/documents/verify,
-// which requires the password.
-export async function GET() {
+// Approved viewers and admins only. Returns short-lived signed URLs for
+// inline viewing. Downloading still goes through /api/documents/verify.
+export async function GET(req: Request) {
+  const r = await requireRole(req, ["viewer", "admin", "super_admin"]);
+  if ("error" in r) return r.error;
+
   const snap = await getAdminDb()
     .collection("pdfDocuments")
     .orderBy("order")

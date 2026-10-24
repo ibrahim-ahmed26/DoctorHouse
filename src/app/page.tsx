@@ -11,7 +11,6 @@ import ChatWidget from "@/components/ChatWidget";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import Preloader from "@/components/preloader";
 import FAQSection from "@/components/FAQSection";
-import DocumentsSection from "@/components/DocumentsSection";
 import VideoBanner from "@/components/VideoBanner";
 
 export default async function Home() {
@@ -19,14 +18,13 @@ export default async function Home() {
     <main id="top">
       <Preloader />
       <Header />
+      <VideoBanner src="/HeaderVideo.mp4" contained={false} />
       <Hero />
-      <VideoBanner src="/header-video.mp4" overlay={0.6} />
       <ShiftSection />
       <CrewTeaser />
       <HowItWorks />
       <Quote />
       <Partners />
-      <DocumentsSection />
       <FAQSection />
       <BookingForm />
       <Footer />

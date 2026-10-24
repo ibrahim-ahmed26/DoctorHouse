@@ -1,3 +1,4 @@
+import { requireRole } from "@/lib/auth/roles";
 import { NextResponse } from "next/server";
 import { getAdminDb } from "@/lib/firebase/admin";
 import { hashPassword } from "@/lib/password";
@@ -5,6 +6,9 @@ import cloudinary from "@/lib/cloudinaryAdmin";
 import type { PdfDoc } from "@/lib/types";
 
 export async function POST(req: Request) {
+  const auth = await requireRole(req, ["viewer", "admin", "super_admin"]);
+  if ("error" in auth) return auth.error;
+
   const body = (await req.json()) as { password?: string };
   if (!body.password) {
     return NextResponse.json({ error: "Password required" }, { status: 400 });

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { LanguageProvider } from "@/lib/i18n/LanguageProvider";
 import "./globals.css";
+import ToasterProvider from "@/components/ToasterProvider";
 
 export const metadata: Metadata = {
   title: "Doctor House Care",
@@ -23,6 +24,7 @@ export default function RootLayout({
       </head>
       <body>
         <LanguageProvider>{children}</LanguageProvider>
+        <ToasterProvider />
       </body>
     </html>
   );

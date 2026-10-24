@@ -14,8 +14,18 @@ async function verify(req: Request) {
 
   try {
     const decoded = await getAdminAuth().verifyIdToken(token);
-    const role: Role = (decoded.role as Role) ?? "admin"; // default: least privilege
-    return { ok: true as const, uid: decoded.uid, role };
+    const role = decoded.role;
+
+    // Must have an explicit admin role. No role (or "viewer") = no access.
+    if (role !== "admin" && role !== "super_admin") {
+      return {
+        ok: false as const,
+        status: 403,
+        error: "Admin access required",
+      };
+    }
+
+    return { ok: true as const, uid: decoded.uid, role: role as Role };
   } catch {
     return {
       ok: false as const,
@@ -25,7 +35,7 @@ async function verify(req: Request) {
   }
 }
 
-// Any signed-in dashboard user — used by doctors/leads routes.
+// Any admin or super admin — used by doctors/leads/faqs routes.
 export async function requireAdmin(req: Request) {
   return verify(req);
 }

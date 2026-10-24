@@ -3,38 +3,87 @@ import { useEffect, useState } from "react";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 import Reveal from "@/components/Reveal";
 import PdfCanvasViewer from "@/components/PdfCanvasViewer";
-
+import { authFetch } from "@/lib/docs/client";
 type ViewDoc = { id: string; title: { en: string; ar: string }; url: string };
 
 export default function DocumentsSection() {
   const { t, locale } = useLanguage();
   const [docs, setDocs] = useState<ViewDoc[]>([]);
+  const [loaded, setLoaded] = useState(false);
   const [viewing, setViewing] = useState<ViewDoc | null>(null);
 
   const [downloadPrompt, setDownloadPrompt] = useState(false);
   const [downloadPassword, setDownloadPassword] = useState("");
   const [downloadError, setDownloadError] = useState<string | null>(null);
   const [downloading, setDownloading] = useState(false);
+  const [shielded, setShielded] = useState(false);
 
   useEffect(() => {
-    fetch("/api/documents/view")
-      .then((r) => r.json())
-      .then((d) => setDocs(d.docs ?? []));
+    authFetch("/api/documents/view")
+      .then((r) => (r.ok ? r.json() : { docs: [] }))
+      .then((d) => setDocs(d.docs ?? []))
+      .catch(() => setDocs([]))
+      .finally(() => setLoaded(true));
   }, []);
 
   useEffect(() => {
     if (!viewing) return;
-    function blockPrint(e: KeyboardEvent) {
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "p") {
+    const hide = () => setShielded(true);
+    const show = () => {
+      if (document.hasFocus() && !document.hidden) setShielded(false);
+    };
+    const onVis = () => (document.hidden ? hide() : show());
+
+    function onKeyDown(e: KeyboardEvent) {
+      const k = e.key.toLowerCase();
+      if ((e.ctrlKey || e.metaKey) && (k === "p" || k === "s")) {
         e.preventDefault();
         e.stopPropagation();
       }
+      if (e.metaKey && e.shiftKey) {
+        hide(); // Mac screenshot shortcuts
+        setTimeout(show, 2000);
+      }
     }
-    window.addEventListener("keydown", blockPrint, true);
-    return () => window.removeEventListener("keydown", blockPrint, true);
+    function onKeyUp(e: KeyboardEvent) {
+      if (e.key === "PrintScreen") {
+        navigator.clipboard?.writeText(" ").catch(() => {});
+        hide();
+        setTimeout(show, 1500);
+      }
+    }
+
+    window.addEventListener("keydown", onKeyDown, true);
+    window.addEventListener("keyup", onKeyUp, true);
+    window.addEventListener("blur", hide);
+    window.addEventListener("focus", show);
+    document.addEventListener("visibilitychange", onVis);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown, true);
+      window.removeEventListener("keyup", onKeyUp, true);
+      window.removeEventListener("blur", hide);
+      window.removeEventListener("focus", show);
+      document.removeEventListener("visibilitychange", onVis);
+      setShielded(false);
+    };
   }, [viewing]);
 
-  if (docs.length === 0) return null;
+  if (!loaded) return null;
+  if (docs.length === 0)
+    return (
+      <section id="documents" className="cover-head">
+        <div className="wrap">
+          <div className="head">
+            <h2>{t.docsHead}</h2>
+            <p>
+              {locale === "ar"
+                ? "لا توجد مستندات حاليًا."
+                : "No documents yet."}
+            </p>
+          </div>
+        </div>
+      </section>
+    );
 
   async function confirmDownload(e: React.FormEvent) {
     e.preventDefault();
@@ -42,9 +91,8 @@ export default function DocumentsSection() {
     setDownloading(true);
     setDownloadError(null);
 
-    const res = await fetch("/api/documents/verify", {
+    const res = await authFetch("/api/documents/verify", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ password: downloadPassword }),
     });
     const data = await res.json();
@@ -167,7 +215,15 @@ export default function DocumentsSection() {
                 </button>
               </div>
             </div>
-            <PdfCanvasViewer url={viewing.url} />
+
+            <div className={`doc-shield${shielded ? " on" : ""}`}>
+              <PdfCanvasViewer url={viewing.url} />
+              <div className="doc-watermark" aria-hidden="true">
+                {Array.from({ length: 60 }).map((_, i) => (
+                  <span key={i}>Dr. Mamdouh</span>
+                ))}
+              </div>
+            </div>
 
             {downloadPrompt && (
               <div

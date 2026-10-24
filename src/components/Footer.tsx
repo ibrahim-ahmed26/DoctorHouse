@@ -23,6 +23,7 @@ export default function Footer() {
             <a href="/our-crew">{t.n2}</a>
             <a href="/#how">{t.n3}</a>
             <a href="/#partners">{t.n4}</a>
+            <a href="/documents">{t.n6}</a>
             <a href="/#faq">{t.n5}</a>
           </nav>
         </div>

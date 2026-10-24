@@ -1,6 +1,6 @@
 :root {
-  --bg: #f2fffd;
-  --card: #ffffff;
+  --bg: #2a3334;
+  --card: #334041;
   --ink: #1b263a;
   --mute: #5c6f7e;
   --pine: #1b263a;
@@ -25,8 +25,8 @@
     --mute: #9fb3b0;
     --pine: #141818;
     --pine-2: #0d3a45;
-    --sage: #1e3634;
-    --line: #33403e;
+    --sage: #2f4442;
+    --line: #475857;
     --on: #f2fffd;
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   }
@@ -1451,4 +1451,106 @@ footer {
 }
 .video-banner-content h2 {
   color: #fff;
+}
+/* Documents gate */
+.gate {
+  min-height: 70vh;
+  display: grid;
+  place-items: center;
+  padding: 120px 16px 60px;
+}
+.gate-card {
+  width: 100%;
+  max-width: 400px;
+  display: grid;
+  gap: 12px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+.gate-card h2 {
+  margin: 0;
+}
+.gate-sub {
+  margin: 0 0 4px;
+  color: var(--mute);
+  font-size: 15px;
+}
+.gate-card input {
+  width: 100%;
+  padding: 12px 14px;
+  font: inherit;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.gate-card input:focus {
+  outline: 2px solid var(--brass);
+  outline-offset: 1px;
+}
+.gate-submit {
+  width: 100%;
+  justify-content: center;
+}
+.gate-submit:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+.gate-switch {
+  background: none;
+  border: 0;
+  padding: 6px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  color: var(--brass);
+}
+.gate-bar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 96px 24px 0;
+}
+.gate-signout {
+  padding: 8px 18px;
+  font-size: 14px;
+}
+/* Document protection */
+.doc-viewer {
+  user-select: none;
+  -webkit-user-select: none;
+}
+.doc-shield {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.doc-shield.on > :first-child {
+  filter: blur(40px) brightness(0.3);
+}
+.doc-watermark {
+  position: absolute;
+  inset: -40%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 60px 80px;
+  transform: rotate(-25deg);
+  pointer-events: none;
+  user-select: none;
+  z-index: 5;
+  opacity: 0.18;
+  font-size: 15px;
+  font-weight: 600;
+  color: #666;
+}
+@media print {
+  body {
+    display: none !important;
+  }
 }
