@@ -3,7 +3,10 @@ import Footer from "@/components/Footer";
 import DocumentsGate from "@/components/DocumentsGate";
 import DocumentsSection from "@/components/DocumentsSection";
 
-export const metadata = { title: "Doctor's Guides — Doctor House Care" };
+export const metadata = {
+  title: "Doctor's Guides",
+  robots: { index: false, follow: false },
+};
 
 export default function DocumentsPage() {
   return (
